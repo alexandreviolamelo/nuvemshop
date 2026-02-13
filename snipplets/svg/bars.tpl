@@ -1,0 +1,1 @@
+<i class="fi fi-rr-menu-burger {{ class }}"></i>

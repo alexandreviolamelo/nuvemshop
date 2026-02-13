@@ -1,0 +1,1 @@
+<i class="fi fi-brands-facebook {{ class }}"></i>

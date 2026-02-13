@@ -1,0 +1,1 @@
+<i class="fi fi-rr-angle-small-left {{ class }}"></i>
