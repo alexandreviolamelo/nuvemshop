@@ -18,15 +18,12 @@
                         {% else %}
                             <div class="mb-1 font-weight-bold">{{ 'El link para cambiar tu contraseña expiró' | translate }}</div>
                             <div class="mb-3">{{ 'Ingresá tu email para recibir uno nuevo.' | translate }}</div>
-                            <a href="{{ store.customer_reset_password_url }}" class="btn-link-primary" >{{ 'Ingresar email' | translate }}</a>
+                            <a href="{{ store.customer_reset_password_url }}" class="btn-link btn-link-primary">{{ 'Ingresar email' | translate }}</a>
                         {% endif %}
                     </div>
 
                     {% if contact_links and is_account_activation %}
-                        {% include "snipplets/contact-links.tpl" with {
-                            phone_and_mail_only: true, 
-                            centered_info: true
-                        } %}
+                        {% include "snipplets/contact-links.tpl" with {phone_and_mail_only: true} %}
                     {% endif %}
 
                 {% else %}
@@ -34,7 +31,7 @@
                         <div class="alert alert-danger">{{ 'Las contraseñas no coinciden.' | translate }}</div>
                     {% endif %}
 
-                    {% embed "snipplets/forms/form.tpl" with{form_id: 'newpass-form', submit_custom_class: 'btn-block', submit_text: (is_account_activation ? 'Activar cuenta' : 'Cambiar contraseña')  | translate } %}
+                    {% embed "snipplets/forms/form.tpl" with{form_id: 'newpass-form', submit_text: (customer.password ? 'Cambiar contraseña' : 'Activar cuenta')  | translate } %}
                         {% block form_body %}
 
                             {# Password input #}
@@ -44,7 +41,7 @@
 
                             {# Password confirm input #}
 
-                            {% embed "snipplets/forms/form-input.tpl" with{type_password: true, input_for: 'password_confirm', input_name: 'password_confirm', input_id: 'password_confirm', input_label_text: 'Confirmar contraseña' | translate } %}
+                            {% embed "snipplets/forms/form-input.tpl" with{type_password: true, input_for: 'password_confirm', input_name: 'password_confirm', input_id: 'password_confirm', input_label_text: 'Confirmar Contraseña' | translate } %}
                             {% endembed %}
                             
                         {% endblock %}

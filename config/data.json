@@ -1,7 +1,15 @@
 {
-    "preview": {
-        "compiled_assets": [
-            "css/style-colors.scss.tpl"
-        ]
-    }
+  "name": "Cerâmicas Carol Viana",
+  "description": "Tema personalizado com base no layout Amazonas e identidade Carol Viana",
+  "author": "Alexandre Viola Design studio",
+  "version": "1.0.0",
+  "preview": {
+    "compiled_assets": [
+      "static/css/style-colors.scss.tpl",
+      "static/css/style-async.scss.tpl"
+    ]
+  },
+  "instatheme": {
+    "is_custom": true
+  }
 }

@@ -10,7 +10,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <title>{{ page_title }}</title>
         <meta name="description" content="{{ page_description }}" />
-        <link rel="preload" as="style" href="{{ [settings.font_headings, settings.font_rest] | google_fonts_url('400,700') }}" />
+        <link rel="preload" as="style" href="{{ [settings.font_headings, settings.font_rest] | google_fonts_url('300, 400, 700') }}" />
         <link rel="preload" href="{{ 'css/style-colors.scss.tpl' | static_url }}" as="style" />
 
         {# Preload LCP home, category and product page elements #}
@@ -31,7 +31,7 @@
 
             {{ component(
                 'fonts',{
-                    font_weights: '400,700',
+                    font_weights: '300, 400, 700',
                     font_settings: 'settings.font_headings, settings.font_rest'
                 })
             }}
@@ -82,18 +82,7 @@
         {{ component('structured-data') }}
 
     </head>
-    <body class="{% if customer %}customer-logged-in{% endif %} template-{{ template | replace('.', '-') }}" data-rounded-borders="{{ settings.theme_rounded ? 'true' : 'false' }}" data-solid-icons="{{ settings.icons_solid ? 'true' : 'false' }}">
-
-        {# Theme icons #}
-
-        {% include "snipplets/svg/icons.tpl" %}
-
-        {% if settings.icons_solid %}
-            {% include "snipplets/svg/icons-solid.tpl" %}
-        {% else %}
-            {% include "snipplets/svg/icons-regular.tpl" %}
-        {% endif %}
-
+    <body class="{% if customer %}customer-logged-in{% endif %} template-{{ template | replace('.', '-') }}">
         {# Facebook comments on product page #}
 
         {% if template == 'product' %}
@@ -118,19 +107,15 @@
 
         {# Page content #}
 
-        {% if template != 'home' or (template == 'home' and settings.slider is empty) %}
+        {% template_content %}
 
-        <div class="mt-4">
+        {# Modals overlay #}
 
-        {% endif %}
+        <div class="js-modal-overlay modal-overlay" style="display: none;"></div>
 
-            {% template_content %}
+        {# Quickshop modal #}
 
-        {% if template != 'home' or (template == 'home' and settings.slider and settings.slider is not empty) %}
-
-        </div>
-
-        {% endif %}
+        {% snipplet "grid/quick-shop.tpl" %}
 
         {# WhatsApp chat button #}
 
@@ -138,7 +123,7 @@
 
         {# Footer #}
 
-        {% snipplet "footer/footer.tpl" %}
+        {% snipplet "footer.tpl" %}
 
         {% if cart.free_shipping.cart_has_free_shipping or cart.free_shipping.min_price_free_shipping.min_price %}
 
@@ -172,11 +157,7 @@
 
                 {# Specific store JS functions: product variants, cart, shipping, etc #}
 
-                {% if store.useStoreJsV2() %}
-                    {% include "static/js/store-v2.js.tpl" %}
-                {% else %}
-                    {% include "static/js/store.js.tpl" %}
-                {% endif %}
+                {% include "static/js/store.js.tpl" %}
             });
         </script>
 
@@ -192,10 +173,6 @@
                 };
             </script>
         {% endif %}
-
-        {# Google survey JS for Tiendanube Survey #}
-
-        {% include "static/js/google-survey.js.tpl" %}
 
         {# Store external codes added from admin #}
 

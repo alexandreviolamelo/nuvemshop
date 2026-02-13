@@ -1,32 +1,23 @@
-<section class="container mb-4 text-center">
-	<div class="row">
-		<div class="col-12">
-			{% include "snipplets/breadcrumbs.tpl" %}
-		</div>
-	</div>
-</section>
-
 {% embed "snipplets/page-header.tpl" %}
 	{% block page_header_text %}{{ 'Crear cuenta' | translate }}{% endblock page_header_text %}
 {% endembed %}
 
-<p class="text-center mb-4 px-4"> {{ 'Comprá más rápido y llevá el control de tus pedidos, ¡en un solo lugar!'| translate }} </p>
+<p class="text-center mb-4 px-5">{{ 'Comprá más rápido y llevá el control de tus pedidos, ¡en un solo lugar!'| translate }}</p>
 
-{# Account Validation #}
+{# Account validation #}
 {% if account_validation == 'pending' %}
 	<div class="container">
-		<div class="row justify-content-center">
-			<div class="col-md-6 col-lg-4">
-				<div class="js-account-validation-pending alert alert-primary p-3 mb-4">
-					<svg class="icon-inline icon-2x svg-icon-primary"><use xlink:href="#email"/></svg>
-					<h5 class="my-3">{{ "¡Estás a un paso de crear tu cuenta!" | translate }}</h5>
-					<p class="mb-0 mt-0 mt-2 font-small">{{ "Te enviamos un link a <strong>{1}</strong> para que valides tu email." | t(customer_email) }} </p>
+		<div class="row justify-content-md-center">
+			<div class="col-md-6 offset3">
+				<div class="js-account-validation-pending alert alert-primary mb-3">
+					<h4 class="weight-strong mb-1 p-2">{{ "¡Estás a un paso de crear tu cuenta!" | translate }}</h4>
+					<p class="font-small mb-1">{{ "Te enviamos un link a <strong>{1}</strong> para que valides tu email." | t(customer_email) }} </p>
 				</div>
-				<div class="text-center mb-3 font-small">
-					<p>{{ "¿Todavía no lo recibiste?" | translate }} <span class="js-resend-validation-link btn-link btn-link-primary">{{ "Enviar link de nuevo" | translate }}</span></p>
+				<div class="font-small text-center mb-4">
+					<p>{{ "¿Todavía no lo recibiste?" | translate }} <span class="js-resend-validation-link btn-link">{{ "Enviar link de nuevo" | translate }}</span></p>
 				</div>
 				<div class="js-resend-validation-success alert alert-success" style="display:none">
-					<p class="m-1">{{ "¡El link fue enviado correctamente!" | translate }}</p>
+					<p class="mb-0">{{ "¡El link fue enviado correctamente!" | translate }}</p>
 				</div>
 				<div class="js-resend-validation-error alert alert-danger" style="display:none">
 					<p class="m-1">{{ "No pudimos enviar el email, intentalo de nuevo en unos minutos." | translate }}</p>
@@ -34,7 +25,6 @@
 			</div>
 		</div>
 	</div>
-	
 {% else %}
 
 	{# Register Form #}
@@ -43,16 +33,15 @@
 		<div class="container">
 			<div class="row justify-content-md-center">
 				<div class="col-md-8">
-
 					{% embed "snipplets/forms/form.tpl" with{form_id: 'login-form', submit_custom_class: 'js-recaptcha-button btn-block', submit_prop: 'disabled', submit_text: 'Crear cuenta' | translate, data_store: 'account-register' } %}
 						{% block form_body %}
 
 							{# Name input #}
 							
-							{% embed "snipplets/forms/form-input.tpl" with{type_text: true, input_for: 'name', input_value: result.name, input_name: 'name', input_id: 'name', input_label_text: 'Nombre y apellido' | translate, input_placeholder: 'ej.: María Perez' | translate} %}
+							{% embed "snipplets/forms/form-input.tpl" with{type_text: true, input_for: 'name', input_value: result.name, input_name: 'name', input_id: 'name', input_label_text: 'Nombre' | translate, input_placeholder: 'ej.: María Perez' | translate} %}
 								{% block input_form_alert %}
 									{% if result.errors.name %}
-						                <div class="notification-danger notification-left">{{ 'Usamos tu nombre para identificar tus pedidos.' | translate }}</div>
+						                <div class="alert alert-danger">{{ 'Usamos tu nombre para identificar tus pedidos.' | translate }}</div>
 						            {% endif %}
 								{% endblock input_form_alert %}
 							{% endembed %}
@@ -62,9 +51,9 @@
 							{% embed "snipplets/forms/form-input.tpl" with{type_email: true, input_for: 'email', input_value: result.email, input_name: 'email', input_id: 'email', input_label_text: 'Email' | translate, input_placeholder: 'ej.: tunombre@email.com' | translate} %}
 								{% block input_form_alert %}
 									{% if result.errors.email == 'exists' %}
-						                <div class="notification-danger notification-left">{{ 'Encontramos otra cuenta que ya usa este email. Intentá usando otro o iniciá sesión.' | translate }}</div>
+						                <div class="alert alert-danger">{{ 'Encontramos otra cuenta que ya usa este email. Intentá usando otro o iniciá sesión.' | translate }}</div>
 						            {% elseif result.errors.email %}
-						                <div class="notification-danger notification-left">{{ 'Necesitamos un email válido para crear tu cuenta.' | translate }}</div>
+						                <div class="alert alert-danger">{{ 'Necesitamos un email válido para crear tu cuenta.' | translate }}</div>
 						            {% endif %}
 								{% endblock input_form_alert %}
 							{% endembed %}
@@ -79,17 +68,17 @@
 							{% embed "snipplets/forms/form-input.tpl" with{type_password: true, input_for: 'password', input_name: 'password', input_id: 'password', input_label_text: 'Contraseña' | translate} %}
 								{% block input_form_alert %}
 									{% if result.errors.password == 'required' %}
-						                <div class="notification-danger notification-left">{{ 'Necesitamos una contraseña para registrarte.' | translate }}</div>
+						                <div class="alert alert-danger">{{ 'Necesitamos una contraseña para registrarte.' | translate }}</div>
 						            {% endif %}
 								{% endblock input_form_alert %}
 							{% endembed %}
 
 							{# Password confirm input #}
 
-							{% embed "snipplets/forms/form-input.tpl" with{type_password: true, input_for: 'password_confirmation', input_name: 'password_confirmation', input_id: 'password_confirmation', input_label_text: 'Confirmar contraseña' | translate} %}
+							{% embed "snipplets/forms/form-input.tpl" with{type_password: true, input_for: 'password_confirmation', input_name: 'password_confirmation', input_id: 'password_confirmation', input_label_text: 'Confirmar Contraseña' | translate} %}
 								{% block input_form_alert %}
 									{% if result.errors.password == 'confirmation' %}
-						                <div class="notification-danger notification-left">{{ 'Las contraseñas no coinciden.' | translate }}</div>
+						                <div class="alert alert-danger">{{ 'Las contraseñas no coinciden.' | translate }}</div>
 						            {% endif %}
 								{% endblock input_form_alert %}
 							{% endembed %}
@@ -102,7 +91,7 @@
 					{% endembed %}
 				</div>
 			</div>
-			<p class="mt-3 text-center">{{ '¿Ya tenés una cuenta?' | translate }} {{ "Iniciá sesión" | translate | a_tag(store.customer_login_url, '', 'btn-link-primary') }}</p>
+			<p class="mt-3 text-center">{{ '¿Ya tenés una cuenta?' | translate }} <strong>{{ "Iniciá sesión" | translate | a_tag(store.customer_login_url, '', 'btn-link-primary') }}</strong></p>
 		</div>
 	</section>
 {% endif %}

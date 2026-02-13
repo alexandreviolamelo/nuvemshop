@@ -10,16 +10,14 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>{{ page_title }}</title>
         <meta name="description" content="{{ page_description }}" />
-        <link rel="preload" as="style" href="{{ [settings.font_headings, settings.font_rest] | google_fonts_url('400,700') }}" />
+        <link rel="preload" as="style" href="{{ [settings.font_headings, settings.font_rest] | google_fonts_url('300, 400, 700') }}" />
         <link rel="preload" href="{{ 'css/style-colors.scss.tpl' | static_url }}" as="style" />
-
+        
         {{ component('social-meta') }}
 
         {#/*============================================================================
             #CSS and fonts
         ==============================================================================*/#}
-
-        {# Critical CSS needed to show first elements of store while CSS async is loading #}
 
         <style>
         
@@ -27,13 +25,20 @@
 
             {{ component(
                 'fonts',{
-                    font_weights: '400,700',
+                    font_weights: '300, 400, 700',
                     font_settings: 'settings.font_headings, settings.font_rest'
                 })
             }}
 
             {% include "static/css/style-critical.tpl" %}
         </style>
+
+        {# Critical CSS needed to show first elements of store while CSS async is loading #}
+
+        <style>
+            {% include "static/css/style-critical.tpl" %}
+        </style>
+
 
         {# Colors and fonts used from settings.txt and defined on theme customization #}
 
@@ -63,7 +68,11 @@
 
         {# Jquery async by adding script_tag(true) #}
 
-        {{ '//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js' | script_tag(true) }}
+        {% if load_jquery %}
+
+            {{ '//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js' | script_tag(true) }}
+
+        {% endif %}
 
         {# Loads private Tienda Nube JS #}
 
@@ -80,39 +89,17 @@
 
         {{back_to_admin}}
 
-        {# Theme icons #}
-
-        {% include "snipplets/svg/icons.tpl" %}
-
-        {% if settings.icons_solid %}
-            {% include "snipplets/svg/icons-solid.tpl" %}
-        {% else %}
-            {% include "snipplets/svg/icons-regular.tpl" %}
-        {% endif %}
-
         {# Page content #}
 
-        <header class="head-main head-{{ settings.head_background }}">
+        <section class="section-password">
             <div class="container">
                 <div class="row justify-content-md-center">
                     <div class="col-md-8 text-center">
-                        <div class="my-2">
-                            {{ component('logos/logo', {
-                                logo_size: 'large',
-                                logo_img_classes: 'transition-soft', 
-                                logo_text_classes: 'h5 h3-md mb-0'}) 
-                            }}
+                        <div class="my-5">
+                            {{ component('logos/logo', {logo_size: 'large', logo_img_classes: 'transition-soft-slow', logo_text_classes: 'h1 m-0'}) }}
                         </div>
-                    </div>
-                </div>
-            </div>
-        </header>
 
-        <section class="section-password py-5">
-            <div class="container">
-                <div class="row justify-content-md-center">
-                    <div class="col-md-8 text-center">
-                        <h2 class="mt-2 mb-5">{{ message }}</h2>
+                        <h2 class="mb-5">{{ message }}</h2>
                         {% embed "snipplets/forms/form.tpl" with{form_id: 'password-form', submit_text: 'Desbloquear' | translate } %}
                             {% block form_body %}
 
@@ -126,6 +113,7 @@
 
                             {% endblock %}
                         {% endembed %}
+
                     </div>
                 </div>
             </div>
@@ -134,7 +122,7 @@
 
         {# Footer #}
 
-        {% snipplet "footer/footer.tpl" %}
+        {% snipplet "footer.tpl" %}
 
         {# Javascript needed to footer logos lazyload #}
 
@@ -145,10 +133,5 @@
             {% include "static/js/external-no-dependencies.js.tpl" %}
 
         </script>
-
-        {# Google survey JS for Tienda Nube Survey #}
-
-        {% include "static/js/google-survey.js.tpl" %}
-
     </body>
 </html>
