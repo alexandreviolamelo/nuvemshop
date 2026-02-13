@@ -11,15 +11,9 @@
 
 #}
 
-
-<div class="{% if card_collapse %}js-card-collapse {% endif %}card {{ card_custom_class }} {% if card_active %}active{% endif %}">
-    <div class="{% if card_collapse %}js-card-header-collapse card-header-collapse {% endif %}card-header">
+<div class="card">
+    <div class="card-header">
         {% block card_head %}{% endblock %}
-        {% if card_collapse %}
-            <span class="js-card-collapse-toggle card-collapse-toggle {% if card_active %}active{% endif %} d-md-none">
-                <svg class="icon-inline icon-w-14 icon-lg"><use xlink:href="#chevron-down"/></svg>
-            </span>
-        {% endif %}
     </div>
     <div class="card-body">
         {% block card_body %}{% endblock %}

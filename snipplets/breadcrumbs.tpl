@@ -8,7 +8,7 @@
 #}
 
 {% if breadcrumbs %}
-    <div class="breadcrumbs {{ breadcrumbs_custom_class }} {% if template == 'category' %}mb-md-0 text-center text-md-left{% endif %}">
+    <div class="breadcrumbs {{ breadcrumbs_custom_class }}">
         <a class="crumb" href="{{ store.url }}" title="{{ store.name }}">{{ "Inicio" | translate }}</a>
         <span class="divider">></span>
         {% if template == 'page' %}
@@ -20,11 +20,11 @@
         {% elseif template == 'account.order' %}
              <span class="crumb active">{{ 'Orden {1}' | translate(order.number) }}</span>
         {% elseif template == 'blog' %}
-            <span class="crumb active">{{ 'Blog' | translate }}</span>
+             <span class="crumb active">{{ 'Blog' | translate }}</span>
         {% elseif template == 'blog-post' %}
-            <a class="crumb" href={{ store.blog_url }} title="{{ 'Blog' | translate }}">{{ 'Blog' | translate }}</a>
-            <span class="divider">></span>
-            <span class="crumb active">{{ post.title }}</span>
+             <a href="{{ store.blog_url }}" class="crumb">{{ 'Blog' | translate }}</a>
+             <span class="divider">></span>
+             <span class="crumb active">{{ post.title }}</span>
         {% else %}
             {% for crumb in breadcrumbs %}
                 {% if crumb.last %}

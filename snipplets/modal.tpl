@@ -11,8 +11,6 @@
     // modal_fixed_footer - For modals with fixed footer. Need to include the fixed part inside the footer
 
 
-#Topbar
-    // Block - modal_topbar
 #Head
     // Block - modal_head
 #Body
@@ -32,30 +30,18 @@
         <div class="modal-with-fixed-footer">
             <div class="modal-scrollable-area">
     {% endif %}
-                {% if modal_topbar %}
-                    <div class="modal-topbar">
-                        {% block modal_topbar %}{% endblock %}
-                    </div>
-                {% endif %}
-                {% if modal_header %}
-                    <div class="js-modal-close {% if modal_mobile_full_screen %}js-fullscreen-modal-close{% endif %} modal-header {{ modal_header_class }}">
-                        <span class="modal-close {{ modal_close_class }}">
-                            <svg class="icon-inline modal-close-icon icon-w-10"><use xlink:href="#times"/></svg>
-                        </span>
-                        {% block modal_head %}{% endblock %}
-                    </div>
-                {% else %}
-                    <span class="js-modal-close modal-close no-header {{ modal_close_class }}">
-                        <svg class="icon-inline icon-lg modal-close-icon icon-w-10"><use xlink:href="#times"/></svg>
+                <div class="js-modal-close {% if modal_mobile_full_screen %}js-fullscreen-modal-close{% endif %} modal-header {{ modal_header_class }}">
+                    <span class="modal-close">
+                        {% include "snipplets/svg/times.tpl" with {svg_custom_class: "icon-inline svg-icon-text"} %}
                     </span>
-                {% endif %}
-         
+                    {% block modal_head %}{% endblock %}
+                </div>
                 <div class="modal-body">
                     {% block modal_body %}{% endblock %}
                 </div>
-    {% if modal_footer and modal_fixed_footer %}
+        {% if modal_footer and modal_fixed_footer %}
             </div>
-    {% endif %}
+        {% endif %}
     {% if modal_footer %}
             <div class="modal-footer {% if not modal_fixed_footer %}d-md-block{% endif %} {{ modal_footer_class }}">
                 {% block modal_foot %}{% endblock %}
@@ -64,10 +50,9 @@
         </div>
         {% endif %}
     {% endif %}
-
     {% if modal_form_action %}
     </form>
     {% endif %}
 </div>
 
-<div class="js-modal-overlay modal-overlay {% if modal_zindex_top %}modal-zindex-top{% endif %}" data-modal-id="#{{ modal_id }}" style="display: none;"></div>
+<div class="js-modal-overlay {% if modal_mobile_full_screen %}js-fullscreen-overlay{% endif %} modal-overlay {% if modal_zindex_top %}modal-zindex-top{% endif %}" data-modal-id="#{{ modal_id }}" style="display: none;"></div>

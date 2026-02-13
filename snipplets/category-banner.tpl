@@ -14,6 +14,6 @@
 
 {% set category_image_url = 'banner-products.jpg' | static_url %}
 
-<section class="category-banner mt-4n mb-4" data-store="category-banner">
+<section class="category-banner position-relative mb-2" data-store="category-banner">
     <img class="position-relative w-100" fetchpriority="high" src="{{ category_images['large'] }}" srcset="{{ category_images['large'] }} 480w, {{ category_images['huge'] }} 640w, {{ category_images['original'] }} 1024w, {{ category_images['1080p'] }} 1920w" alt="{{ 'Banner de la categoría' | translate }} {{ category.name }}" />
 </section>

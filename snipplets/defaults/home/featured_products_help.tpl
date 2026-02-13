@@ -1,28 +1,25 @@
 {# Products featured that work as examples #}
-<section class="section-featured-home" data-store="{{ data_store }}">
-	<div class="container">
-		<div class="row js-products-{{ highlighted_products_setting_name }}-container" data-format="slider" data-desktop-columns="{% if settings.grid_columns == 2 %}4{% else %}3{% endif %}">
-		    <div class="col-12 text-center">
-		    	<h3 class="h1 js-products-{{ highlighted_products_setting_name }}-title">{{ products_title }}</h3>
-		    </div>
-		    <div class="col-12 p-0">
-				<div class="js-swiper-featured-demo-{{ highlighted_products_setting_name }} swiper-container swiper-products p-md-1">
-	                <div class="swiper-wrapper">
-	                	{% include 'snipplets/defaults/help_item.tpl' with {'slide_item': true, 'help_item_1': true}  %}
-	                	{% include 'snipplets/defaults/help_item.tpl' with {'slide_item': true, 'help_item_2': true}  %}
-	                	{% include 'snipplets/defaults/help_item.tpl' with {'slide_item': true, 'help_item_3': true}  %}
-	                	{% include 'snipplets/defaults/help_item.tpl' with {'slide_item': true, 'help_item_4': true}  %}
-	                	{% include 'snipplets/defaults/help_item.tpl' with {'slide_item': true, 'help_item_5': true}  %}
-	                	{% include 'snipplets/defaults/help_item.tpl' with {'slide_item': true, 'help_item_6': true}  %}
-	                </div>
-	            </div>
-		    </div>
 
-			<div class="js-swiper-featured-demo-prev-{{ highlighted_products_setting_name }} js-swiper-{{ highlighted_products_setting_name }}-prev swiper-button-prev d-none d-md-block svg-circle svg-circle-big svg-icon-text{% if settings.icons_solid %} svg-solid{% endif %}">
-				<svg class="icon-inline icon-2x mr-1 icon-flip-horizontal"><use xlink:href="#chevron"/></svg>
+<section class="section-featured-home" data-store="home-products-featured">
+	<div class="container position-relative">
+		<div class="row">
+			<div class="col-12 text-center">
+				<h3>{{ 'Productos destacados' | translate }}</h3>
 			</div>
-			<div class="js-swiper-featured-demo-next-{{ highlighted_products_setting_name }} js-swiper-{{ highlighted_products_setting_name }}-next swiper-button-next d-none d-md-block svg-circle svg-circle-big svg-icon-text{% if settings.icons_solid %} svg-solid{% endif %}">
-				<svg class="icon-inline icon-2x ml-1"><use xlink:href="#chevron"/></svg>
+			<div class="col-12">
+				<div class="js-swiper-featured-demo swiper-container">
+					<div class="swiper-wrapper">
+						{% include 'snipplets/defaults/help_item.tpl' with {'help_item_1': true, 'slide_item': true} %}
+						{% include 'snipplets/defaults/help_item.tpl' with {'help_item_2': true, 'slide_item': true} %}
+						{% include 'snipplets/defaults/help_item.tpl' with {'help_item_3': true, 'slide_item': true} %}
+						{% include 'snipplets/defaults/help_item.tpl' with {'help_item_4': true, 'slide_item': true} %}
+						{% include 'snipplets/defaults/help_item.tpl' with {'help_item_5': true, 'slide_item': true} %}
+						{% include 'snipplets/defaults/help_item.tpl' with {'help_item_6': true, 'slide_item': true} %}
+					</div>
+					<div class="js-swiper-featured-demo-pagination swiper-pagination"></div>
+					<div class="js-swiper-featured-demo-prev swiper-button-prev d-none d-md-block">{% include "snipplets/svg/chevron-left.tpl" with {svg_custom_class: "icon-inline icon-w-8 icon-2x svg-icon-text"} %}</div>
+					<div class="js-swiper-featured-demo-next swiper-button-next d-none d-md-block">{% include "snipplets/svg/chevron-right.tpl" with {svg_custom_class: "icon-inline icon-w-8 icon-2x svg-icon-text"} %}</div>
+				</div>
 			</div>
 		</div>
 	</div>

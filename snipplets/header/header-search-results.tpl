@@ -14,21 +14,21 @@
                     	<p>
                     		{{ product.price | money }}
 
-                            {% set product_can_show_installments = product.show_installments and product.display_price and product.get_max_installments.installment > 1 and settings.product_installments %}
+                            {% set product_can_show_installments = product.show_installments and product.display_price and product.get_max_installments.installment > 1 %}
                             {% if product_can_show_installments %}
                                 {% set max_installments_without_interests = product.get_max_installments(false) %}
                                 {% if max_installments_without_interests and max_installments_without_interests.installment > 1 %}
-                                    <span>| {{ "Hasta <span class='installment-amount'>{1}</span> cuotas sin interés" | t(max_installments_without_interests.installment) }}</span>
+                                    <span>| {{ "Hasta <strong class='installment-amount'>{1}</strong> cuotas sin interés" | t(max_installments_without_interests.installment) }}</span>
                                 {% endif %}
                             {% endif %}
                     	</p>
                     {% endif %}
                 </div>
                 <div class="col-xs-auto">
-                    <svg class="icon-inline search-suggest-icon"><use xlink:href="#chevron"/></svg>
+                    {% include "snipplets/svg/chevron-right.tpl" with {svg_custom_class: "icon-inline search-suggest-icon"} %}
                 </div>
             </a>
         </li>
     {% endfor %}
-    <a href="#" class="js-search-suggest-all-link btn btn-primary d-inline-block mt-3">{{ 'Ver todos los resultados' | translate }}</a>
+    <a href="#" class="js-search-suggest-all-link btn btn-primary d-block">{{ 'Ver todos los resultados' | translate }}</a>
 </ul>

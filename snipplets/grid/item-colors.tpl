@@ -7,10 +7,10 @@
             {% if variation.name in ['Color', 'Cor'] %}
                 {% if variation.options | length > 1 %}
                     <div class="js-item-colors item-colors">
-                        <a href="{{ product_url_with_selected_variant }}" class="item-colors-bullet d-md-none w-auto px-2">{{ variation.options | length }} {{ 'colores' | translate }}</a>
+                        <a href="{{ product_url_with_selected_variant }}" class="item-colors-bullet item-colors-bullet-text d-md-none w-auto px-2">{{ variation.options | length }} {{ 'colores' | translate }}</a>
                         <div class="d-none d-md-block">
                             {% for option in variation.options | take(5) if option.custom_data %}
-                                <span title="{{ option.name }}" data-option="{{ option.id }}" class="js-color-variant item-colors-bullet" style="background: {{ option.custom_data }}"></span>
+                                <span title="{{ option.name }}" data-option="{{ option.id }}" data-variation-id="{{ variation.id }}" class="js-color-variant item-colors-bullet" style="background: {{ option.custom_data }}"></span>
                             {% endfor %}
 
                             {% for option in variation.options %}
@@ -36,7 +36,7 @@
                             {% elseif own_color_variants > 5 %}
                                 <a href="{{ product_url_with_selected_variant }}" class="item-colors-bullet w-auto" title="{{ 'Ver más colores' | translate }}">+{{ own_color_variants - 5 }}</a>
                             {% elseif custom_color_variants %}
-                                <a href="{{ product_url_with_selected_variant }}" class="item-colors-bullet w-auto px-2" title="{{ 'Ver más colores' | translate }}">{{ custom_color_variants }} {{ 'colores' | translate }}</a>
+                                <a href="{{ product_url_with_selected_variant }}" class="item-colors-bullet item-colors-bullet-text w-auto px-2" title="{{ 'Ver más colores' | translate }}">{{ custom_color_variants }} {{ 'colores' | translate }}</a>
                             {% endif %}
                         </div>
                     </div>
@@ -44,4 +44,4 @@
             {% endif %}
         </div>
     {% endfor %}
-{% endif %}
+{% endif %} 

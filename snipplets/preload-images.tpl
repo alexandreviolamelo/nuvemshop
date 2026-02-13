@@ -1,67 +1,57 @@
 {% if template == 'home' %}
 
-    {# Preload home LCP image of first section #}
+	{# Preload home LCP image of slider section #}
 
-    {% set has_main_slider = settings.slider and settings.slider is not empty %}
-    {% set has_mobile_slider = settings.toggle_slider_mobile and settings.slider_mobile and settings.slider_mobile is not empty %}
-    {% set has_auto_height_slider = not settings.slider_viewport_height %}
-    {% set use_smaller_thumbs = (has_auto_height_slider and not has_mobile_slider) or has_mobile_slider %}
+	{% set has_main_slider = settings.slider and settings.slider is not empty %}
+	{% set has_mobile_slider = settings.toggle_slider_mobile and settings.slider_mobile and settings.slider_mobile is not empty %}
 
-    {% if has_mobile_slider %}
-        {% set slider = settings.slider_mobile %}
-    {% else %}
-        {% set slider = settings.slider %}
-    {% endif %}
+	{% if has_mobile_slider %}
+		{% set slider = settings.slider_mobile %}
+	{% else %}
+		{% set slider = settings.slider %}
+	{% endif %}
 
-    {% if settings.home_order_position_0 == 'slider' and (has_main_slider or has_mobile_slider) %}
-        {% for slide in slider %}
-            {% set slide_image = slide.image | static_url %}
-            {% if loop.first %}
-                <link rel="preload" as="image" href="{{ slide_image | settings_image_url('large') }}" imagesrcset="{% if use_smaller_thumbs %}{{ slide.image | static_url | settings_image_url('large') }} 480w, {{ slide.image | static_url | settings_image_url('huge') }} 640w, {% endif %}{{ slide_image | settings_image_url('original') }} 1024w, {{ slide_image | settings_image_url('1080p') }} 1920w">
-            {% endif %}
-        {% endfor %}
-    {% endif %}
+	{% if settings.home_order_position_0 == 'slider' and (has_main_slider or has_mobile_slider) %}
+		{% for slide in slider %}
+			{% if loop.first %}
+				<link rel="preload" as="image" href="{{ slide.image | static_url | settings_image_url('large') }}" imagesrcset="{{ slide.image | static_url | settings_image_url('large') }} 480w, {{ slide.image | static_url | settings_image_url('xlarge') }} 1400w, {{ slide.image | static_url | settings_image_url('1080p') }} 1920w">
+			{% endif %}
+		{% endfor %}
+	{% endif %}
 
     {% if settings.home_order_position_0 == 'categories' %}
 
         {% set priority_assigned = false %}
-        
+
         {% for banner in ['banner_01', 'banner_02', 'banner_03'] %}
             {% set banner_show = attribute(settings,"#{banner}_show") %}
             {% set banner_image = "#{banner}.jpg" | has_custom_image %}
             {% set banner_image_src = "#{banner}.jpg" | static_url %}
+
             {% if banner_show and banner_image and not priority_assigned %}
                 {% set priority_assigned = true %}
                 <link rel="preload" as="image" href="{{ banner_image_src | settings_image_url('large') }}" imagesrcset="{{ banner_image_src | settings_image_url('large') }} 480w, {{ banner_image_src | settings_image_url('huge') }} 640w">
             {% endif %}
         {% endfor %}
+
     {% endif %}
 
-    {% if settings.home_order_position_0 == 'promotional' %}
-
+    {% if settings.home_order_position_0 == 'modules' %}
+    
         {% set priority_assigned = false %}
-        
-        {% for banner in ['banner_promotional_01', 'banner_promotional_02', 'banner_promotional_03'] %}
-            {% set banner_show = attribute(settings,"#{banner}_show") %}
-            {% set banner_image = "#{banner}.jpg" | has_custom_image %}
-            {% set banner_image_src = "#{banner}.jpg" | static_url %}
-            {% if banner_show and banner_image and not priority_assigned %}
+
+        {% for module in ['module_01', 'module_02'] %}
+            {% set module_show = attribute(settings,"#{module}_show") %}
+            {% set module_image = "#{module}.jpg" | has_custom_image %}
+            {% set module_image_src = "#{module}.jpg" | static_url %}
+
+            {% if module_show and module_image and not priority_assigned %}
                 {% set priority_assigned = true %}
-                <link rel="preload" as="image" href="{{ banner_image_src | settings_image_url('large') }}" imagesrcset="{{ banner_image_src | settings_image_url('large') }} 480w, {{ banner_image_src | settings_image_url('huge') }} 640w">
+                <link rel="preload" as="image" href="{{ module_image_src | settings_image_url('large') }}" imagesrcset="{{ module_image_src | settings_image_url('large') }} 480w, {{ module_image_src | settings_image_url('huge') }} 640w">
             {% endif %}
         {% endfor %}
+        
     {% endif %}
-
-    {% set has_module_banner = settings.module and settings.module is not empty %}
-
-    {% if settings.home_order_position_0 == 'modules' and has_module_banner %}
-        {% for slide in settings.module %}
-            {% if loop.first %}
-                <link rel="preload" as="image" href="{{ slide.image | static_url | settings_image_url('large') }}" imagesrcset="{{ slide.image | static_url | settings_image_url('large') }} 480w, {{ slide.image | static_url | settings_image_url('huge') }} 640w, {{ slide.image | static_url | settings_image_url('original') }} 1024w">
-            {% endif %}
-        {% endfor %}
-    {% endif %}
-
 {% elseif template == 'product' %}
 
     {# Preload product LCP image #}
@@ -71,7 +61,6 @@
             <link rel="preload" as="image" href="{{ image | product_image_url('large') }}" imagesrcset="{{ image | product_image_url('large') }} 480w, {{ image | product_image_url('huge') }} 640w, {{ image | product_image_url('original') }} 1024w">
         {% endif %}
     {% endfor %}
-
 {% elseif template == 'category' %}
 
     {# Preload category LCP image #}

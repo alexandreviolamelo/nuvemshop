@@ -1,11 +1,8 @@
-<div class="col-4 col-md-2">
+<div class="col-4">
 	<div class="instafeed-link">
-		<div class="instafeed-img p-0">
-			{% if help_item_1 %}
-				<svg viewBox="0 0 260 260"><use xlink:href="#instagram-placeholder-1"/></svg>
-			{% elseif help_item_2 %}
-				<svg viewBox="0 0 260 260"><use xlink:href="#instagram-placeholder-2"/></svg>
-			{% endif %}
+		<div class="instafeed-img">
+			{% set type_value = help_item_1 ? 'like_icon' : 'instagram_icon' %}
+			{{ component('placeholders/instagram-post-placeholder',{type: type_value})}}
 		</div>
 	</div>
 </div>

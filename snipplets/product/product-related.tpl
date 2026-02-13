@@ -1,4 +1,4 @@
-{# Related products visibility conditions #}
+{# Default related products visibility conditions #}
 
 {% set related_products = [] %}
 {% set related_products_ids_from_app = product.metafields.related_products.related_products_ids %}
@@ -34,7 +34,6 @@
 
         {% set related_products = related_products | merge(related_products_for_refill)  %}
     {% endif %}
-
 {% endif %}
 
 {% set complementary_products = complementary_product_list | length > 0 %}
@@ -44,22 +43,18 @@
 
 {# Set related products classes #}
 
-{% set section_class = 'section-products-related position-relative mb-3' %}
-{% set container_class = 'container px-0' %}
-{% set title_container_class = 'text-center px-3' %}
-{% set title_accent_class = settings.theme_rounded ? 'text-primary' %}
-{% set title_class = 'h1' ~ title_accent_class %}
-{% set products_container_class = 'products-slider swiper-container-horizontal p-relative' %}
-{% set slider_container_class = 'swiper-container p-md-1' %}
+{% set section_class = 'section-products-related my-3' %}
+{% set container_class = 'container' %}
+{% set title_class = 'h3 text-center' %}
+{% set products_container_class = 'position-relative swiper-container-horizontal' %}
+{% set slider_container_class = 'swiper-container' %}
 {% set swiper_wrapper_class = 'swiper-wrapper' %}
-{% set slider_control_class = 'icon-inline icon-2x' %}
-{% set slider_controls_container_class = 'd-none d-md-block svg-circle svg-circle-big svg-icon-text' %}
-{% set slider_controls_thickness_class = settings.icons_solid ? 'svg-solid' %}
-{% set slider_control_prev_class = 'swiper-button-prev ' ~ slider_controls_container_class ~ ' ' ~ slider_controls_thickness_class %}
-{% set slider_control_next_class = 'swiper-button-next ' ~ slider_controls_container_class ~ ' ' ~ slider_controls_thickness_class %}
-{% set slider_control_pagination_class = 'swiper-pagination m-top' %}
-{% set control_next_svg_id = 'chevron' %}
-{% set control_prev_svg_id = 'chevron' %}
+{% set slider_control_pagination_class = 'swiper-pagination' %}
+{% set slider_control_class = 'icon-inline icon-w-8 icon-2x svg-icon-text' %}
+{% set slider_control_prev_class = 'swiper-button-prev' %}
+{% set slider_control_next_class = 'swiper-button-next' %}
+{% set control_prev = include ('snipplets/svg/chevron-left.tpl', {svg_custom_class: slider_control_class}) %}
+{% set control_next = include ('snipplets/svg/chevron-right.tpl', {svg_custom_class: slider_control_class}) %}
 
 {# Alternative products #}
 
@@ -76,21 +71,22 @@
             product_template_path: 'snipplets/grid/item.tpl',
             product_template_params: {'slide_item': true},
             slider_controls_position: 'bottom',
+            slider_pagination: true,
+            svg_sprites: false,
             section_classes: {
-                section: 'js-related-products ' ~  section_class,
+                section: 'js-related-products ' ~ section_class,
                 container: container_class,
-                title_container: title_container_class,
                 title: title_class,
+                products_container: products_container_class,
                 slider_container: 'js-swiper-related ' ~ slider_container_class,
                 slider_wrapper: swiper_wrapper_class,
-                slider_control: slider_control_class,
+                slider_control_pagination: 'js-swiper-related-pagination ' ~ slider_control_pagination_class,
                 slider_control_prev_container: 'js-swiper-related-prev ' ~ slider_control_prev_class,
-                slider_control_prev: 'icon-flip-horizontal',
                 slider_control_next_container: 'js-swiper-related-next ' ~ slider_control_next_class,
             },
-            control_next_svg_id: control_next_svg_id,
-            control_prev_svg_id: control_prev_svg_id,
-        })
+            custom_control_prev: control_prev,
+            custom_control_next: control_next,
+        }) 
     }}
 {% endif %}
 
@@ -109,21 +105,21 @@
             product_template_path: 'snipplets/grid/item.tpl',
             product_template_params: {'slide_item': true},
             slider_controls_position: 'bottom',
+            slider_pagination: true,
+            svg_sprites: false,
             section_classes: {
                 section: 'js-complementary-products ' ~ section_class,
                 container: container_class,
-                title_container: title_container_class,
                 title: title_class,
+                products_container: products_container_class,
                 slider_container: 'js-swiper-complementary ' ~ slider_container_class,
                 slider_wrapper: swiper_wrapper_class,
-                slider_control: slider_control_class,
+                slider_control_pagination: 'js-swiper-complementary-pagination ' ~ slider_control_pagination_class,
                 slider_control_prev_container: 'js-swiper-complementary-prev ' ~ slider_control_prev_class,
-                slider_control_prev: 'icon-flip-horizontal',
                 slider_control_next_container: 'js-swiper-complementary-next ' ~ slider_control_next_class,
             },
-            control_next_svg_id: control_next_svg_id,
-            control_prev_svg_id: control_prev_svg_id,
-        })
+            custom_control_prev: control_prev,
+            custom_control_next: control_next,
+        }) 
     }}
 {% endif %}
-</div>

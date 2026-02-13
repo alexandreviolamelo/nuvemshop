@@ -1,16 +1,13 @@
-<div class="js-addtocart js-addtocart-placeholder btn btn-primary btn-block btn-transition {{ custom_class }} disabled" style="display: none;">
+<div class="js-addtocart js-addtocart-placeholder btn btn-primary btn-transition disabled {{ custom_class }}" style="display: none;">
     <div class="d-inline-block">
-        <span class="js-addtocart-text">{% if direct_add %}{{ 'Comprar' | translate }}{% else %}{{ 'Agregar al carrito' | translate }}{% endif %}</span>
-        <span class="js-addtocart-success transition-container btn-transition-success-small">
-            <svg class="icon-inline svg-icon-invert btn-transition-success-icon"><use xlink:href="#check-circle"/></svg>
+        <span class="js-addtocart-text transition-container btn-transition-start active">
+            {{ 'Agregar al carrito' | translate }}
         </span>
-        <div class="js-addtocart-adding transition-container transition-soft btn-transition-progress">
-            <div class="spinner-ellipsis invert">
-                <div class="point"></div>
-                <div class="point"></div>
-                <div class="point"></div>
-                <div class="point"></div>
-            </div>
+        <span class="js-addtocart-success transition-container btn-transition-success">
+            {{ '¡Listo!' | translate }}
+        </span>
+        <div class="js-addtocart-adding js-addtocart-adding-text transition-container btn-transition-progress">
+            {{ 'Agregando...' | translate }}
         </div>
     </div>
 </div>

@@ -6,26 +6,25 @@
 
 #Title
 
-#Breadcrumbs
+#Breadcrumbs 
 
 #}
 
-<section class="page-header" data-store="page-title">
-	{% if template != 'product' or template != 'contact' %}
-	<div class="container">
-		<div class="row">
-	{% endif %}
-			<div class="{% if template != 'product' %}col text-center{% endif %} {% if template == 'category' %}col-lg-8 offset-lg-2{% endif %}">
-				{% if template == 'product' or template == 'account.orders' or template == 'account.order' or template == 'blog' or template == 'blog-post' %}
-					{% include 'snipplets/breadcrumbs.tpl' %}
-				{% endif %}
-				<h1 class="{% if template == 'product' %}js-product-name{% else %}text-center{% endif %} h2 h1-md {% if template == 'contact' %} text-md-left{% endif %}{% if settings.theme_rounded and template != 'product' %} text-primary{% endif %}" {% if template == "product" %}data-store="product-name-{{ product.id }}"{% endif %}>{% block page_header_text %}{% endblock %}</h1>
-				{% if template == 'category' and category.description %} 
-					<p class="font-small font-md-normal text-center mb-0 mb-md-4">{{ category.description }}</p> 
-				{% endif %}
-			</div>
-	{% if template != 'product' %}
-		</div>
-	</div>
-	{% endif %}
+<section class="page-header mt-3" {% if template != 'product' %}data-store="page-title"{% endif %}>
+    {% if template != 'product' %}
+    <div class="container">
+        <div class="row">
+    {% endif %}
+            <div class="{% if template != 'product' %}col text-center{% endif %} {% if template == 'product' %}text-center text-md-left{% endif %} {% if template == 'category' %}col-lg-6 offset-lg-3{% endif %}">
+                {% include 'snipplets/breadcrumbs.tpl' %}
+                <h1 {% if template == 'product' %}class="js-product-name" data-store="product-name-{{ product.id }}"{% endif %} >{% block page_header_text %}{% endblock %}</h1>
+                {% if template == 'category' and category.description %}
+                    <p class="page-header-text font-md-normal">{{ category.description }}</p>
+                    <div class="divider col-2 offset-5 background-primary"></div>
+                {% endif %}
+            </div>
+    {% if template != 'product' %}
+        </div>
+    </div>
+    {% endif %}
 </section>

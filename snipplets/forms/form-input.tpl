@@ -73,25 +73,23 @@
             {% if data_component %}data-component="{{ data_component }}"{% endif %}
         />
             {% if type_password %} 
-            <a aria-label="{{ 'Ver contraseña' | translate }}" class="js-password-view btn form-toggle-eye">
-                <span class="js-eye-open" style="display: none;">
-                    <svg class="icon-inline svg-icon-primary icon-w-20"><use xlink:href="#eye"/></svg>
-                </span>
-                <span class="js-eye-closed">
-                    <svg class="icon-inline svg-icon-primary icon-w-20"><use xlink:href="#eye-closed"/></svg>
-                </span>
-            </a>                        
+                <a aria-label="{{ 'Ver contraseña' | translate }}" class="js-password-view btn form-toggle-eye">
+                    <span class="js-eye-open" style="display: none;">
+                        {% include "snipplets/svg/eye.tpl" with {svg_custom_class: "icon-inline svg-icon-primary"} %}
+                    </span>
+                    <span class="js-eye-closed">
+                        {% include "snipplets/svg/eye-closed.tpl" with {svg_custom_class: "icon-inline svg-icon-primary"} %}
+                    </span>
+                </a>                        
             {% endif %}
     {% endif %}
-    {% block input_add_on %}
-    {% endblock input_add_on %}
     {% if input_append_content or input_prepend_content %}
     </div>
     {% endif %}
     {% block input_append_content %}
     {% endblock input_append_content %}
     {% if input_help %}
-   <div class="mt-4 text-center">
+    <div class="mt-4 text-center">
         <a href="{{ input_help_link }}" class="btn-link {{ input_link_class }}">{% block input_help_text %}{% endblock input_help_text %}</a>
     </div>
     {% endif %}

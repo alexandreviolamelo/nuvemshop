@@ -1,15 +1,15 @@
 {# Set related products classes #}
 
-{% set container_class = 'position-relative' %}
-{% set title_class = 'h5 ml-md-3 pb-1' %}
+{% set title_class = 'h4 text-center mt-3' %}
+{% set products_container_class = 'position-relative swiper-container-horizontal' %}
 {% set slider_container_class = 'swiper-container' %}
 {% set swiper_wrapper_class = 'swiper-wrapper' %}
-{% set slider_control_container_class = 'd-none d-md-block' %}
-{% set slider_control_prev_class = 'swiper-button-prev swiper-button-outside ' ~ slider_control_container_class %}
-{% set slider_control_next_class = 'swiper-button-next swiper-button-outside ' ~ slider_control_container_class %}
-{% set slider_control_class = 'icon-inline icon-lg' %}
-{% set control_next_svg_id = 'chevron' %}
-{% set control_prev_svg_id = 'chevron' %}
+{% set slider_control_pagination_class = 'swiper-pagination' %}
+{% set slider_control_class = 'icon-inline icon-w-8 icon-2x svg-icon-text' %}
+{% set slider_control_prev_class = 'swiper-button-prev' %}
+{% set slider_control_next_class = 'swiper-button-next' %}
+{% set control_prev = include ('snipplets/svg/chevron-left.tpl', {svg_custom_class: slider_control_class}) %}
+{% set control_next = include ('snipplets/svg/chevron-right.tpl', {svg_custom_class: slider_control_class}) %}
 
 {# Related cart products #}
 
@@ -28,20 +28,21 @@
             product_template_path: 'snipplets/grid/item.tpl',
             product_template_params: {'slide_item': true, 'reduced_item': true},
             slider_controls_position: 'bottom',
+            slider_pagination: true,
+            svg_sprites: false,
             section_classes: {
                 section: 'js-related-products-notification',
-                container: container_class,
                 title: title_class,
-                products_container: 'related-products-notification-container mx-md-3',
+                products_container: products_container_class,
                 slider_container: 'js-swiper-related-products-notification ' ~ slider_container_class,
                 slider_wrapper: swiper_wrapper_class,
-                slider_control: slider_control_class,
+                slider_control: 'd-none d-md-block',
+                slider_control_pagination: 'js-swiper-related-products-notification-pagination ' ~ slider_control_pagination_class,
                 slider_control_prev_container: 'js-swiper-related-products-notification-prev ' ~ slider_control_prev_class,
-                slider_control_prev: 'icon-flip-horizontal',
                 slider_control_next_container: 'js-swiper-related-products-notification-next ' ~ slider_control_next_class,
             },
-            control_next_svg_id: control_next_svg_id,
-            control_prev_svg_id: control_prev_svg_id,
+            custom_control_prev: control_prev,
+            custom_control_next: control_next,
         })
     }}
 {% endif %}

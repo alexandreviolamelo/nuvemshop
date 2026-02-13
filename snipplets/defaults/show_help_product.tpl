@@ -1,54 +1,46 @@
-{% include "snipplets/svg/empty-placeholders.tpl" %}
-
-{% set product_view_box = '0 0 1000 1000' %}
-
-<div id="single-product" class="js-has-new-shipping js-product-detail js-product-container js-shipping-calculator-container" data-variants="{{product.variants_object | json_encode }}" data-store="product-detail">
+<div id="single-product">
     <div class="container">
         <div class="row section-single-product">
-            <div class="col-12 col-md-8 pl-0 pr-0 pl-md-3 pr-md-3">
-                <div class="row">
-                    <div class="col-2 d-none d-md-block">
-                        <a href="#" class="js-product-thumb product-thumb d-block position-relative mb-3{% if settings.theme_rounded %} box-rounded-small{% endif %}">
-                            <svg viewBox='{{ product_view_box }}'><use xlink:href="#item-product-placeholder-3"/></svg>
-                        </a>
-                        <a href="#" class="js-product-thumb product-thumb d-block position-relative mb-3{% if settings.theme_rounded %} box-rounded-small{% endif %}">
-                            <svg viewBox='{{ product_view_box }}'><use xlink:href="#product-image-green-placeholder"/></svg>
-                        </a>
-                        <a href="#" class="js-product-thumb product-thumb d-block position-relative mb-3{% if settings.theme_rounded %} box-rounded-small{% endif %}">
-                            <svg viewBox='{{ product_view_box }}'><use xlink:href="#product-image-red-placeholder"/></svg>
-                        </a>
+            <div class="col-12 col-md-7 px-0 px-md-3">
+                <div class="js-swiper-product-demo swiper-container">
+                    <div class="labels">
+                        <div class="label label-primary">{{ "35% OFF" | translate }}</div>
                     </div>
-                    <div class="product-image-container col-12 col-md-10">
-                        <div class="js-swiper-product swiper-container">
-                            <div class="labels">
-                                <div class="label label-primary label-circle">{{ "35% OFF" | translate }}</div>
+                    <div class="swiper-wrapper">
+                         <div class="swiper-slide js-product-slide slider-slide">
+                            <div class="d-block p-relative">
+                                {{ component('placeholders/product-placeholder',{
+                                        type: 'dress',
+                                    })
+                                }}
                             </div>
-                            <div class="swiper-wrapper">
-                                 <div class="swiper-slide js-product-slide slider-slide" data-image="0" data-image-position="0">
-                                    <a href="{{ image | product_image_url('huge') }}" data-fancybox="product-gallery" class="d-block p-relative{% if settings.theme_rounded %} box-rounded{% endif %}">
-                                        <svg viewBox='{{ product_view_box }}'><use xlink:href="#item-product-placeholder-3"/></svg>
-                                    </a>
-                                 </div>
-                                 <div class="swiper-slide js-product-slide slider-slide" data-image="1" data-image-position="1">
-                                    <a href="{{ image | product_image_url('huge') }}" data-fancybox="product-gallery" class="d-block p-relative{% if settings.theme_rounded %} box-rounded{% endif %}">
-                                        <svg viewBox='{{ product_view_box }}'><use xlink:href="#product-image-green-placeholder"/></svg>
-                                    </a>
-                                 </div>
-                                 <div class="swiper-slide js-product-slide slider-slide" data-image="2" data-image-position="2">
-                                    <a href="{{ image | product_image_url('huge') }}" data-fancybox="product-gallery" class="d-block p-relative{% if settings.theme_rounded %} box-rounded{% endif %}">
-                                        <svg viewBox='{{ product_view_box }}'><use xlink:href="#product-image-red-placeholder"/></svg>
-                                    </a>
-                                 </div>
+                         </div>
+                         <div class="swiper-slide js-product-slide slider-slide">
+                            <div class="d-block p-relative">
+                                {{ component('placeholders/product-placeholder',{
+                                        type: 'dress',
+                                        color: 'green',
+                                    })
+                                }}
                             </div>
-                            <div class="js-swiper-product-pagination swiper-pagination swiper-pagination-white h5 font-weight-normal d-block d-md-none"></div>
-                        </div>
+                         </div>
+                         <div class="swiper-slide js-product-slide slider-slide">
+                            <div class="d-block p-relative">
+                                {{ component('placeholders/product-placeholder',{
+                                        type: 'dress',
+                                        color: 'red',
+                                    })
+                                }}
+                            </div>
+                         </div>
                     </div>
+                    <div class="js-swiper-product-demo-pagination swiper-pagination"></div>
                 </div>
             </div>
             <div class="col">
                 {# Product name and breadcrumbs #}
 
-                <section class="page-header">
+                <section class="page-header mt-3">
                     <div class="breadcrumbs">
                         <a class="crumb" href="{{ store.url }}" title="{{ store.name }}">{{ "Inicio" | translate }}</a>
                         <span class="divider mr-1">></span>
@@ -56,41 +48,39 @@
                         <span class="divider mr-1">></span>
                         <span class="crumb active">{{ "Producto de ejemplo" | translate }}</span>
                     </div>
-                    <h1 class="h2 h2-sm">{{ "Producto de ejemplo" | translate }}</h1>
+                    <h1>{{ "Producto de ejemplo" | translate }}</h1>
                 </section>
 
                 {# Product price #}
 
-                {% set product_can_show_installments = product.show_installments and product.display_price %}
-
                 {% if store.country == 'BR' %}
                     <div class="price-container">
                         <span class="d-inline-block">
-                           <h4 id="compare_price_display" class="js-compare-price-display price-compare font-weight-normal" style="display:block;">{{"28000" | money }}</h4>
+                           <h4 id="compare_price_display" class="price-compare">{{"28000" | money }}</h4>
                         </span>
                         <span class="d-inline-block mr-3">
-                            <h2 class="js-price-display text-primary" id="price_display">{{"18200" | money }}</h2>
+                            <h4 class="js-price-display text-primary" id="price_display">{{"18200" | money }}</h4>
                         </span>
                     </div>
                 {% else %}
                     <div class="price-container">
                         <span class="d-inline-block">
-                           <h4 id="compare_price_display" class="js-compare-price-display price-compare font-weight-normal" style="display:block;">{{"280000" | money }}</h4>
+                           <h4 id="compare_price_display" class="price-compare">{{"280000" | money }}</h4>
                         </span>
                         <span class="d-inline-block mr-3">
-                            <h2 class="js-price-display text-primary" id="price_display">{{"182000" | money }}</h2>
+                            <h4 class="js-price-display text-primary" id="price_display">{{"182000" | money }}</h4>
                         </span>
                     </div>
                 {% endif %}
 
                 {# Product installments #}
 
-                <div href="#installments-modal" class="js-product-payments-container row mb-4">
-                    <span class="js-max-installments-container js-max-installments col">
-                        <span class="float-left mr-2">
-                            <svg class="icon-inline svg-icon-text icon-lg"><use xlink:href="#credit-card"/></svg>
+                <div class="row mb-4">
+                    <span class="col">
+                        <span class="d-inline-block">
+                            {% include "snipplets/svg/credit-card-blank.tpl" with {svg_custom_class : "icon-inline icon-w-18 icon-lg svg-icon-text mr-2"} %}
                         </span>
-                        <span class="d-table text-inline">
+                        <span class="d-inline-block">
                             <span>{{ "Hasta 12 cuotas" | translate }}</span>
                         </span>
                     </span>
@@ -110,41 +100,39 @@
                                     <option value="{{ "Rojo" | translate }}">{{ "Rojo" | translate }}</option>
                                 </select>
                                 <div class="form-select-icon">
-                                    <svg class="icon-inline icon-w-14 icon-lg"><use xlink:href="#chevron-down"/></svg>
+                                    {% include "snipplets/svg/chevron-down.tpl" with {svg_custom_class: "icon-inline icon-w-14 icon-lg svg-icon-text"} %}
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="form-row mb-2">
+                    <div class="row">
                         <div class="col col-md-4">
                             {% embed "snipplets/forms/form-input.tpl" with{
                             type_number: true, input_value: '1', 
                             input_name: 'quantity' ~ item.id, 
-                            input_custom_class: 'js-quantity-input', 
+                            input_custom_class: 'js-quantity-input text-center h5', 
                             input_label: false, 
                             input_append_content: true, 
                             input_group_custom_class: 'js-quantity form-quantity', 
                             form_control_container_custom_class: 'col', 
-                            form_control_quantity: true,
                             input_min: '1'} %}
                                 {% block input_prepend_content %}
                                 <div class="row m-0 align-items-center">
                                     <span class="js-quantity-down form-quantity-icon btn">
-                                        <svg class="icon-inline icon-w-12 icon-lg"><use xlink:href="#minus"/></svg>
+                                        {% include "snipplets/svg/minus.tpl" with {svg_custom_class: "icon-inline icon-w-12 icon-lg svg-icon-text"} %}
                                     </span>
                                 {% endblock input_prepend_content %}
                                 {% block input_append_content %}
                                     <span class="js-quantity-up form-quantity-icon btn">
-                                        <svg class="icon-inline icon-w-12 icon-lg"><use xlink:href="#plus"/></svg>
+                                        {% include "snipplets/svg/plus.tpl" with {svg_custom_class: "icon-inline icon-w-12 icon-lg svg-icon-text"} %}
                                     </span>
                                 </div>
                                 {% endblock input_append_content %}
                             {% endembed %}
                         </div>
-                        <div class="col col-md-8">
-                            <input type="submit" class="js-addtocart js-prod-submit-form btn btn-primary btn-block mb-4 cart" value="{{ 'Agregar al carrito' | translate }}" />
-                        </div>
                     </div>
+
+                    <input type="submit" class="js-addtocart js-prod-submit-form btn btn-primary btn-block mb-4" value="{{ 'Agregar al carrito' | translate }}" />
 
                  </form>
 
@@ -160,38 +148,25 @@
 
                 {% include 'snipplets/social/social-share.tpl' %}
 
-                {% if settings.show_product_fb_comment_box %}
-                    <div class="fb-comments section-fb-comments" data-href="{{ product.social_url }}" data-num-posts="5" data-width="100%"></div>
-                {% endif %}
-                <div id="reviewsapp"></div>
             </div>
-            
         </div>
     </div>  
 </div>
-<section id="related-products" class="section-products-related position-relative" data-store="related-products">
+<section id="related-products" class="section-products-related">
     <div class="container">
-        <div class="row">
-            <div class="col-12 text-center">
-                <h3 class="h1">{{ "Productos relacionados" | translate }}</h3>
+        <h2 class="products-section-title h3 text-center">{{ "Productos relacionados" | translate }}</h2>
+        <div class="js-swiper-related-demo swiper-container">
+            <div class="swiper-wrapper">
+                {% include 'snipplets/defaults/help_item.tpl' with {'slide_item': true, 'help_item_1': true} %}
+                {% include 'snipplets/defaults/help_item.tpl' with {'slide_item': true, 'help_item_2': true} %}
+                {% include 'snipplets/defaults/help_item.tpl' with {'slide_item': true, 'help_item_4': true} %}
+                {% include 'snipplets/defaults/help_item.tpl' with {'slide_item': true, 'help_item_6': true} %}
+                {% include 'snipplets/defaults/help_item.tpl' with {'slide_item': true, 'help_item_7': true} %}
+                {% include 'snipplets/defaults/help_item.tpl' with {'slide_item': true, 'help_item_8': true} %}
             </div>
-            <div class="col-12">
-                <div class="js-swiper-related swiper-container p-md-1">
-                    <div class="swiper-wrapper">
-                        {% include 'snipplets/defaults/help_item.tpl' with {'slide_item': true, 'help_item_1': true}  %}
-                        {% include 'snipplets/defaults/help_item.tpl' with {'slide_item': true, 'help_item_2': true}  %}
-                        {% include 'snipplets/defaults/help_item.tpl' with {'slide_item': true, 'help_item_4': true}  %}
-                        {% include 'snipplets/defaults/help_item.tpl' with {'slide_item': true, 'help_item_6': true}  %}
-                        {% include 'snipplets/defaults/help_item.tpl' with {'slide_item': true, 'help_item_7': true}  %}
-                    </div>
-                </div>
-            </div>
-            <div class="js-swiper-related-prev swiper-button-prev d-none d-md-block svg-circle svg-circle-big svg-icon-text{% if settings.icons_solid %} svg-solid{% endif %}">
-                <svg class="icon-inline icon-2x mr-1 icon-flip-horizontal"><use xlink:href="#chevron"/></svg>
-            </div>
-            <div class="js-swiper-related-next swiper-button-next d-none d-md-block svg-circle svg-circle-big svg-icon-text{% if settings.icons_solid %} svg-solid{% endif %}">
-                <svg class="icon-inline icon-2x ml-1"><use xlink:href="#chevron"/></svg>
-            </div>
+            <div class="js-swiper-related-demo-pagination swiper-pagination"></div>
+            <div class="js-swiper-related-demo-prev swiper-button-prev d-none d-md-block">{% include "snipplets/svg/chevron-left.tpl" with {svg_custom_class: 'icon-inline icon-w-8 icon-2x svg-icon-text'} %}</div>
+            <div class="js-swiper-related-demo-next swiper-button-next d-none d-md-block">{% include "snipplets/svg/chevron-right.tpl" with {svg_custom_class: 'icon-inline icon-w-8 icon-2x svg-icon-text'} %}</div>
         </div>
     </div>
 </section>

@@ -2,30 +2,32 @@
     {% if pages.current == 1 and not pages.is_last %}
         <div class="text-center mt-5 mb-5">
             <a class="js-load-more btn btn-primary">
-                <span class="js-load-more-spinner pull-left m-right-quarter" style="display:none;">
-                    <svg class="icon-inline icon-spin"><use xlink:href="#circle-notch"/></svg>
-                </span>
+                <span class="js-load-more-spinner" style="display:none;">{% include "snipplets/svg/sync-alt.tpl" with {svg_custom_class: "icon-inline icon-spin"} %}</span>
                 {{ 'Mostrar más productos' | t }}
             </a>
         </div>
         <div id="js-infinite-scroll-spinner" class="mt-5 mb-5 text-center w-100" style="display:none">
-            <svg class="icon-inline icon-3x svg-icon-text icon-spin"><use xlink:href="#circle-notch"/></svg>
+            {% include "snipplets/svg/sync-alt.tpl" with {svg_custom_class: "icon-inline icon-3x svg-icon-text icon-spin"} %}
         </div>
     {% endif %}
 {% else %}
-    {% if pages.numbers %}
-        <div class="d-flex justify-content-center align-items-center">
-            <a {% if pages.previous %}href="{{ pages.previous }}"{% endif %} class="mr-3 {% if not pages.previous %}opacity-30 disabled{% endif %}">
-                <svg class="svg-circle svg-icon-text icon-inline icon-lg icon-flip-horizontal"><use xlink:href="#chevron"/></svg>
+    <div class="d-flex flex-row justify-content-center align-items-center">
+        {% if pages.numbers %}
+            <a {% if pages.previous %}href="{{ pages.previous }}"{% endif %}>
+                {% include "snipplets/svg/chevron-left.tpl" with {svg_custom_class: "icon-inline icon-w-8 icon-lg"} %}
             </a>
-            <div class="h4 mb-0 text-center font-weight-normal">
-                <span>{{ pages.current }}</span>
-                <span>{{'de' | translate }}</span>
+            <div class="mx-2 font-big px-1">
+                {% for page in pages.numbers %}
+                    {% if page.selected %}
+                        <span>{{ page.number }}</span>
+                    {% endif %}
+                {% endfor %}
+                <span>/</span>
                 <span>{{ pages.amount }}</span>
             </div>
-            <a {% if pages.next %}href="{{ pages.next }}"{% endif %} class="ml-3 {% if not pages.next %}opacity-30 disabled{% endif %}">
-                <svg class="svg-circle svg-icon-text icon-inline icon-lg"><use xlink:href="#chevron"/></svg>
+            <a {% if pages.next %}href="{{ pages.next }}"{% endif %}>
+                {% include "snipplets/svg/chevron-right.tpl" with {svg_custom_class: "icon-inline icon-w-8 icon-lg"} %}
             </a>
-        </div>
-    {% endif %}
+        {% endif %}
+    </div>
 {% endif %}

@@ -1,35 +1,22 @@
 <div class="service-item-container col-md swiper-slide p-0 px-md-3">
-    <div class="service-item mx-4 mx-md-0">
-    	<div class="row align-items-center">
-		    {% if help_item_1 %}
-		    	<div class="col-auto">
-		    		<svg class="icon-inline icon-5x svg-icon-text"><use xlink:href="#icon-placeholder"/></svg>
-		    	</div>
-		    	<div class="col p-0">
-		        	<h3 class="h5 m-0 opacity-50">{{ "Información de envíos" | translate }}</h3>
-		    	</div>
-		    {% elseif help_item_2 %}
-		    	<div class="col-auto">
-		    		<svg class="icon-inline icon-5x svg-icon-text"><use xlink:href="#icon-placeholder"/></svg>
-		    	</div>
-		    	<div class="col p-0">
-		        	<h3 class="h5 m-0 opacity-50">{{ "Información de pagos" | translate }}</h3>
-		        </div>
-		    {% elseif help_item_3 %}
-		    	<div class="col-auto">
-		    		<svg class="icon-inline icon-5x svg-icon-text"><use xlink:href="#icon-placeholder"/></svg>
-		    	</div>
-		    	<div class="col p-0">
-		        	<h3 class="h5 m-0 opacity-50">{{ "Información de contacto" | translate }}</h3>
-		        </div>
-		    {% elseif help_item_4 %}
-		    	<div class="col-auto">
-		    		<svg class="icon-inline icon-5x svg-icon-text"><use xlink:href="#icon-placeholder"/></svg>
-		    	</div>
-		    	<div class="col p-0">
-		        	<h3 class="h5 m-0 opacity-50">{{ "Información de compra" | translate }}</h3>
-		        </div>
-		    {% endif %}
-		</div>
+    <div class="service-item row justify-content-md-center text-md-left align-items-center">
+        <div class="col-md-auto">
+            {% if help_item_1 %}
+                {% include "snipplets/svg/truck.tpl" with {svg_custom_class: "icon-inline icon-w-20 icon-2x service-icon"} %}
+            {% elseif help_item_2 %}
+                {% include "snipplets/svg/credit-card-blank.tpl" with {svg_custom_class: "icon-inline icon-w-18 icon-2x service-icon"} %}
+            {% elseif help_item_3 %}
+                {% include "snipplets/svg/lock.tpl" with {svg_custom_class: "icon-inline icon-w-14 icon-2x service-icon"} %}
+            {% endif %}
+        </div>
+        <div class="col">
+            {% if help_item_1 %}
+                <h3 class="service-title mb-0">{{ "Medios de envío" | translate }}</h3>
+            {% elseif help_item_2 %}
+                <h3 class="service-title mb-0">{{ "Tarjetas de crédito" | translate }}</h3>
+            {% elseif help_item_3 %}
+                <h3 class="service-title mb-0">{{ "Sitio seguro" | translate }}</h3>
+            {% endif %}
+        </div>
     </div>
 </div>
