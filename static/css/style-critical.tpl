@@ -524,9 +524,10 @@ h2,
   font-weight: 700;
 }
 
-h3, .h3 {
-	font-size: 14px;
-	font-weight: 600;
+h3,
+.h3 {
+  font-size: 20px;
+  font-weight: 700;
 }
 
 h4,
@@ -2178,29 +2179,5 @@ p{
 
 {# /* // Height */ #}
 .h-100{height:100%!important}.h-auto{height:auto!important}
-
-/* Custom video slider styles */
-.slide-video-wrapper {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  z-index: 1;
-  overflow: hidden;
-  pointer-events: none;
-}
-
-.slide-video-wrapper iframe {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  min-width: 100%;
-  min-height: 100%;
-  width: 177.77vh; /* 100 * 16 / 9 */
-  height: 56.25vw; /* 100 * 9 / 16 */
-}
-/* End custom video slider styles */
 
 {% endraw %}
