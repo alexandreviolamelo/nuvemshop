@@ -63,6 +63,11 @@ checkbox
 title
     pt: Seções da Home
 
+title
+    pt: Configuração de Vídeo no Slider
+description
+    pt: "Para usar vídeos: No campo 'Descrição do slide', digite VIDEO:: seguido da URL (Ex: VIDEO::https://youtube.com/watch?v=ID). O restante do texto após um espaço será a descrição visível."
+
 checkbox
     home_slider_full
         pt: Slider principal ocupando toda a largura da tela
