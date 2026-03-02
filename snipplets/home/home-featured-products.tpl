@@ -1,38 +1,25 @@
-{# /*============================================================================
-  #Home featured grid
-==============================================================================*/
+{% set has_featured = has_featured | default(false) and sections.primary.products %}
+{% set has_new = has_new | default(false) and sections.new.products %}
+{% set has_sale = has_sale | default(false) and sections.sale.products %}
 
-#Properties
+{% if has_featured %}
+    {% set data_store_name = 'featured' %}
+{% elseif has_new %}
+    {% set data_store_name = 'new' %}
+{% else %}
+    {% set data_store_name = 'sale' %}
+{% endif %}
 
-#Featured Slider
-
-#}
-
-
-{% if sections.primary.products %}
-    <section class="section-featured-home" data-store="home-products-featured">
-        <div class="container">
-            <div class="row">
-                {% if settings.featured_products_title %}
-                    <div class="col-12 text-center">
-                        <h3>{{ settings.featured_products_title }}</h3>
-                    </div>
-                {% endif %}
-                <div class="col-12">
-                    <div class="js-swiper-featured swiper-container">
-                        <div class="swiper-wrapper">
-                            {% for product in sections.primary.products %}
-                                {% include 'snipplets/grid/item.tpl' with {'slide_item': true} %}
-                            {% endfor %}
-
-                        </div>
-                        <div class="js-swiper-featured-pagination swiper-pagination"></div>
-                        <div class="js-swiper-featured-prev swiper-button-prev d-none d-md-block">{% include "snipplets/svg/chevron-left.tpl" with {svg_custom_class: "icon-inline icon-w-8 icon-2x svg-icon-text"} %}</div>
-                        <div class="js-swiper-featured-next swiper-button-next d-none d-md-block">{% include "snipplets/svg/chevron-right.tpl" with {svg_custom_class: "icon-inline icon-w-8 icon-2x svg-icon-text"} %}</div>
-                    </div>
-                </div>
-            </div>
-        </div>
+{% if has_featured or has_new or has_sale %}
+    <section class="section-featured-home" data-store="home-products-{{ data_store_name }}">
+    	{% if has_featured %}
+        	{% include 'snipplets/home/home-featured-grid.tpl' with {'featured_products': true} %}
+        {% endif %}
+        {% if has_new %}
+        	{% include 'snipplets/home/home-featured-grid.tpl' with {'new_products': true} %}
+        {% endif %}
+        {% if has_sale %}
+        	{% include 'snipplets/home/home-featured-grid.tpl' with {'sale_products': true} %}
+        {% endif %}
     </section>
-    {% set section_name = 'primary' %}
 {% endif %}
