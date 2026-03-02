@@ -1909,5 +1909,24 @@ h3, .h3 {
     &:hover {
         transform: translateY(-5px); // Efeito suave ao passar o rato
     }
+/* Garante a proporção 16:9 e cobre todo o slide */
+.embed-responsive {
+    position: relative;
+    display: block;
+    width: 100%;
+    padding: 0;
+    overflow: hidden;
+    padding-top: 56.25%; /* Proporção 16:9 */
+}
+
+.embed-responsive-item {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: 0;
+}
 }
 
