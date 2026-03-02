@@ -1,18 +1,26 @@
+<section class="container mb-4 text-center">
+    <div class="row">
+        <div class="col-12">
+            {% include "snipplets/breadcrumbs.tpl" %}
+        </div>
+    </div>
+</section>
+
 {% embed "snipplets/page-header.tpl" %}
-    {% block page_header_text %}{{ "Cambiar Contraseña" | translate }}{% endblock page_header_text %}
+    {% block page_header_text %}{{ "Cambiar contraseña" | translate }}{% endblock page_header_text %}
 {% endembed %}
 
 <section class="account-page">
     <div class="container">
         <div class="row justify-content-md-center">
             <div class="col-md-8">
-                <p>{{ 'Vamos a enviarte un email para que puedas cambiar tu contraseña.' | translate }}</p>
+                <p class="text-center">{{ 'Vamos a enviarte un email para que puedas cambiar tu contraseña.' | translate }}</p>
 
                 {% if success %}
                     <div class="alert alert-success">{{ '¡Listo! Te enviamos un email a {1}' | translate(email) }}</div>
                 {% endif %}
 
-                {% embed "snipplets/forms/form.tpl" with{form_id: 'resetpass-form', submit_text: 'Enviar email' | translate } %}
+                {% embed "snipplets/forms/form.tpl" with{form_id: 'resetpass-form', submit_custom_class: 'btn-block', submit_text: 'Enviar email' | translate } %}
                     {% block form_body %}
 
                         {# Email input #}
